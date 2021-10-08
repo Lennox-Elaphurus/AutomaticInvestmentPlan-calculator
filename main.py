@@ -78,5 +78,7 @@ total=float(input('请输入定投总金额:\n'))
 
 main(quadraticF,period,total)
 
+input("按回车键关闭程序...")
+
 
 
