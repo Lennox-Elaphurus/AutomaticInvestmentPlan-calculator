@@ -2,6 +2,7 @@ import math
 import matplotlib.pyplot as plt
 import sympy
 import time
+import numpy as np
 
 
 def mysqrt1(x):  #sqrt(x)+b, sympy.integrate(sympy.sqrt(x) + a, (x,i,i+1)
@@ -22,16 +23,6 @@ def sampling(f,period):
         sampleList.append(tmpV)
         sum+=tmpV
     return sampleList,sum
-
-def drawAndSave(List,period,total):
-    plt.figure()
-    plt.scatter(range(1,period+1),List,)
-    plt.xlabel("Period")
-    plt.ylabel("Amount")
-    localtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-    plt.title(localtime)
-    plt.savefig("Period="+str(period)+"Total="+str(total)+".png")
-    # plt.show()
 
 
 def saveToCSV(investmentList,period,total):
@@ -54,11 +45,43 @@ def saveToCSV(investmentList,period,total):
     print("以上表格已保存为csv文件，可以用Excel打开")
     print("期数-定投金额 散点图已保存在当前目录")
 
+
+def mylog(x):
+    return math.log10(x+1)
+
+
 def main(f,period,total):
     standardList,sum=sampling(f,period)
     investmentList = [v * (total/sum) for v in standardList]
     # print(investmentList)
-    drawAndSave(investmentList,period,total)
+
+    # draw and save
+    plt.figure()
+    plt.scatter(range(1,period+1),investmentList,color='r')
+    plt.xlabel("Period")
+    plt.ylabel("Amount")
+    localtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    plt.title(localtime)
+
+    xList=np.arange(0,1,0.01)
+    yList=[quadraticF(x) * (total/sum) for x in xList]
+    xList=[x * period for x in xList]
+    plt.plot(xList,yList,label="-x^2+2x",linestyle="--",color='g')
+
+    xList=np.arange(0,1,0.01)
+    yList=[math.log10(x+1) * (total/sum) for x in xList]
+    xList=[x * period for x in xList]
+    plt.plot(xList,yList,label="log10(x)",linestyle="--",color='y')
+
+    xList=np.arange(0,1,0.01)
+    yList=[math.sqrt(x) * (total/sum) for x in xList]
+    xList=[x * period for x in xList]
+    plt.plot(xList,yList,label="sqrt(x)",linestyle="--",color='b')
+
+    plt.legend()
+    plt.savefig("Period="+str(period)+"Total="+str(total)+".png")
+    # plt.show()
+    # end draw and save
 
     sum2=0
     for v in investmentList:
@@ -69,11 +92,7 @@ def main(f,period,total):
 
 
 period=int(input('请输入定投期数:\n '))
-# period=5
-
 total=float(input('请输入定投总金额:\n'))
-# total=2000
-
 # print("定投期数:"+str(period),"定投总金额:"+str(total))
 
 main(quadraticF,period,total)
