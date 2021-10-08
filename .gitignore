@@ -1,3 +1,7 @@
 .idea/
 *.png
 *.csv
+dist/
+build/
+__pycache__/
+main.spec
