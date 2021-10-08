@@ -17,7 +17,7 @@ Windows用户双击运行`定投计划计算器.exe`，按照指示输入参数�
 
 输出：
 - 每期需投入的金额（保存为CSV文件）
-- 期数-当前投入金额 散点图，附带<img src="https://latex.codecogs.com/png.latex?y=x^4, y=x^2, y=x, y=\sqrt{x}" alt="y=x^4, y=x^2, y=x, y=sqrt(x)" >三条参考线
+- 期数-当前投入金额 散点图，附带<img src="https://latex.codecogs.com/png.latex?y=x^4, y=x^2, y=\sqrt{x}, y=const, y=x" alt="y=x^4, y=x^2, y=sqrt(x), y=const, y=x" >三条参考线
 
 
 ## 计算步骤

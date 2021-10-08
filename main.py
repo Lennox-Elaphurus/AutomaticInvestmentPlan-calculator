@@ -83,9 +83,14 @@ def main(f,period,total):
     plt.plot(xList,yList,label="sqrt(x)",linestyle="--",color='b')
 
     xList=np.arange(0,1,0.01)
-    yList=[x * (total/sum) for x in xList]
+    yList=[ total/period for x in xList]
     xList=[x * period for x in xList]
-    plt.plot(xList,yList,label="x",linestyle="--",color='black')
+    plt.plot(xList,yList,label="const",linestyle="--",color='black')
+
+    xList=np.arange(0,1,0.01)
+    yList=[ x * (total/sum) for x in xList]
+    xList=[x * period for x in xList]
+    plt.plot(xList,yList,label="x",linestyle="--",color='grey')
 
     plt.legend()
     plt.savefig("Period="+str(period)+"Total="+str(total)+".png")
