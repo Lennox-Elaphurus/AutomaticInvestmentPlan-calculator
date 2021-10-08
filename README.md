@@ -5,25 +5,25 @@
 
 ## 程序使用
 
-Windows用户双击运行`定投计划计算器.exe`，按照指示输入参数即可。（*启动程序可能需要大约10秒钟*） 
+Windows用户双击运行`定投计划计算器.exe`，按照指示输入参数即可。（*首次启动程序耗时较长，之后启动大约需要10秒*） 
 
 ## 输入输出
 
 输入：
 - 计划投资的总期数（记为`period`）
 - 计划投入的总金额 (记为`total`)
-- 希望定投金额拟合的函数（已写入程序内，此处选用<img src="https://latex.codecogs.com/png.latex?f(x)=-x^2+2x" alt="f(x)=-x^2+2x">）
+- 希望定投金额拟合的函数（已写入程序内，此处选用<img src="https://latex.codecogs.com/png.latex?f(x)=x^2" alt="f(x)=x^2">）
 
 
 输出：
 - 每期需投入的金额（保存为CSV文件）
-- 期数-当前投入金额 散点图，附带<img src="https://latex.codecogs.com/png.latex?y=-x^2+2x, y=\log_{10}(x), y=\sqrt{x}" alt="y=x^2+2x, y=log10(x), y=sqrt(x)" >三条参考线
+- 期数-当前投入金额 散点图，附带<img src="https://latex.codecogs.com/png.latex?y=x^4, y=x^2, y=x, y=\sqrt{x}" alt="y=x^4, y=x^2, y=x, y=sqrt(x)" >三条参考线
 
 
 ## 计算步骤
 
-1. 给定一个参考函数(<img src="https://latex.codecogs.com/png.latex?  y=-x^{2}+2x" alt="y=x^2+2x">)，取其在`[0,1]`区间上的一段作为标准化函数`f`
-<div align=center><img src="https://latex.codecogs.com/png.latex?f(x)=-x^2+2x,x\in\left[0,1\right]" "f(x)=-x^2+2x" alt="y=x^2+2x, x in [0,1]"></div>
+1. 给定一个参考函数(<img src="https://latex.codecogs.com/png.latex?  y=x^{2}" alt="y=x^2">)，取其在`[0,1]`区间上的一段作为标准化函数`f`
+<div align=center><img src="https://latex.codecogs.com/png.latex?f(x)=x^2,x\in\left[0,1\right]"  alt="y=x^2, x in [0,1]"></div>
 
 2. 根据期数，在`[0,1]`区间均匀地取`period`个点,记为`X`，求得`f`在该点处的值，记为`Y`，取其在`[0,1]`区间上的一段作为标准化函数`f`
 <div  align=center><img src="http://chart.googleapis.com/chart?cht=tx&chl= $$
@@ -45,4 +45,3 @@ $$" style="border:none;" alt="X'={period*x | x in X}, sum=sigma(X), Y'={total/su
 ## 特性
 
 该方法适用于任何在`[0,1]`上恒为正的参考函数
-
