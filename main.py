@@ -50,6 +50,10 @@ def mylog(x):
     return math.log10(x+1)
 
 
+def mysquare(x):
+    return x**2
+
+
 def main(f,period,total):
     standardList,sum=sampling(f,period)
     investmentList = [v * (total/sum) for v in standardList]
@@ -64,19 +68,24 @@ def main(f,period,total):
     plt.title(localtime)
 
     xList=np.arange(0,1,0.01)
-    yList=[quadraticF(x) * (total/sum) for x in xList]
+    yList=[x**4 * (total/sum) for x in xList]
     xList=[x * period for x in xList]
-    plt.plot(xList,yList,label="-x^2+2x",linestyle="--",color='g')
+    plt.plot(xList,yList,label="x^4",linestyle="--",color='g')
 
     xList=np.arange(0,1,0.01)
-    yList=[math.log10(x+1) * (total/sum) for x in xList]
+    yList=[x**2 * (total/sum) for x in xList]
     xList=[x * period for x in xList]
-    plt.plot(xList,yList,label="log10(x)",linestyle="--",color='y')
+    plt.plot(xList,yList,label="x^2",linestyle="--",color='y')
 
     xList=np.arange(0,1,0.01)
     yList=[math.sqrt(x) * (total/sum) for x in xList]
     xList=[x * period for x in xList]
     plt.plot(xList,yList,label="sqrt(x)",linestyle="--",color='b')
+
+    xList=np.arange(0,1,0.01)
+    yList=[x * (total/sum) for x in xList]
+    xList=[x * period for x in xList]
+    plt.plot(xList,yList,label="x",linestyle="--",color='black')
 
     plt.legend()
     plt.savefig("Period="+str(period)+"Total="+str(total)+".png")
@@ -95,7 +104,7 @@ period=int(input('请输入定投期数:\n '))
 total=float(input('请输入定投总金额:\n'))
 # print("定投期数:"+str(period),"定投总金额:"+str(total))
 
-main(quadraticF,period,total)
+main(mysquare,period,total)
 
 input("按回车键关闭程序...")
 
